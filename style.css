@@ -1,0 +1,285 @@
+/* ============================================
+   Yogin Patel — Premium Dark Landing Page
+   Pure CSS · No frameworks · No build tools
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+/* --- Custom Properties --- */
+:root {
+  --bg: #0a0a0f;
+  --cyan: #00e5ff;
+  --violet: #7c3aed;
+  --text: #e0e0e0;
+  --muted: #a0a0b0;
+  --muted-light: #999;
+  --muted-dim: #666;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(0, 229, 255, 0.12);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --radius-card: 20px;
+  --radius-btn: 12px;
+  --max-card: 480px;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* --- Animated Gradient Mesh Background --- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    135deg,
+    #0a0a1a 0%,
+    #0d1025 20%,
+    #150a2e 40%,
+    #0a1a2e 60%,
+    #0a0f1e 80%,
+    #0a0a1a 100%
+  );
+  background-size: 400% 400%;
+  animation: meshShift 20s ease infinite;
+}
+
+@keyframes meshShift {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 100% 0%; }
+  50%  { background-position: 100% 100%; }
+  75%  { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- Radial Glow Behind Card --- */
+.glow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 229, 255, 0.08) 0%,
+    rgba(124, 58, 237, 0.06) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* --- Card --- */
+.card {
+  position: relative;
+  z-index: 1;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  padding: 2.5rem 2rem 2rem;
+  max-width: var(--max-card);
+  width: 100%;
+  text-align: center;
+
+  /* Card entrance animation */
+  animation: cardEntrance 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Staggered Children --- */
+.card > * {
+  animation: fadeSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card > *:nth-child(1) { animation-delay: 0.15s; }
+.card > *:nth-child(2) { animation-delay: 0.25s; }
+.card > *:nth-child(3) { animation-delay: 0.35s; }
+.card > *:nth-child(4) { animation-delay: 0.45s; }
+.card > *:nth-child(5) { animation-delay: 0.55s; }
+.card > *:nth-child(6) { animation-delay: 0.65s; }
+.card > *:nth-child(7) { animation-delay: 0.75s; }
+.card > *:nth-child(8) { animation-delay: 0.85s; }
+
+/* --- Name Heading --- */
+.name {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+/* --- Tagline --- */
+.tagline {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+/* --- Intro --- */
+.intro {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--muted-light);
+  line-height: 1.5;
+  margin-bottom: 1.8rem;
+}
+
+/* --- Action Buttons --- */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.85rem 1.2rem;
+  border-radius: var(--radius-btn);
+  background: var(--cyan);
+  color: var(--bg);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  color: #fff;
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* --- Footer --- */
+.footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.8rem;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--muted-dim);
+  text-align: center;
+}
+
+/* --- Responsive --- */
+@media (max-width: 520px) {
+  .card {
+    padding: 2rem 1.5rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .name {
+    font-size: 1.7rem;
+  }
+
+  .tagline {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  .btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* --- Accessibility: Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .card,
+  .card > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  body::before {
+    animation: none;
+  }
+}
